@@ -28,6 +28,9 @@ runs:
       shell: bash
       env:
         GITHUB_ACTION_PATH: ${{ github.action_path }}
+      
+    - name: Make goodbye.sh executable
+      run: chmod +x /home/runner/work/_actions/bdorin/hello-world-composite-action/main/goodbye.sh
 
     - name: Run goodbye.sh
       run: goodbye.sh
