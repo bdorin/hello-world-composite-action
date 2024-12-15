@@ -18,6 +18,7 @@ warning_patterns = [
 ]
 
 def extract_matches(lines, patterns, eliminate_duplicates: bool = False):
+    print(f"Eliminate Duplicates Flag Inside function: {eliminate_duplicates}")
     if eliminate_duplicates:
         matched_lines = set() # Use a set to eliminate duplicates
     else:
