@@ -1,10 +1,19 @@
-name: 'Hello World'
-description: 'Greet someone'
+name: 'Parse Unity Logs'
+
+description: 'Runs a script that parses errors and warnings from a Unity log file'
+
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+
+  log-path:
+    description: "Path to the log file"
     required: true
-    default: 'World'
+    type: string
+
+  # who-to-greet:  # id of input
+  #   description: 'Who to greet'
+  #   required: true
+  #   default: 'World'
+  
 outputs:
   random-number:
     description: "Random number"
