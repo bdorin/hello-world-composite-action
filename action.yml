@@ -38,4 +38,9 @@ runs:
         text="This is an Error"
         echo "::error file=app.js,line=10,col=15::$text"
       shell: bash
+    - name: Generate Warning Annotations
+      run: |
+        text="This is a Warning"
+        echo "::warning file=app.js,line=10,col=15::$text"
+      shell: bash
         
