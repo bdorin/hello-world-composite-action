@@ -16,7 +16,7 @@ warning_patterns = [
     r'\[.*?warn.*?\]', 
 ]
 
-def extract_matches(lines, patterns, eliminate_duplicates: bool = True):
+def extract_matches(lines, patterns, eliminate_duplicates: bool = False):
     if eliminate_duplicates:
         matched_lines = set() # Use a set to eliminate duplicates
     else:
