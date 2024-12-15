@@ -36,20 +36,6 @@ def print_matchers(type_matcher, type_annotation):
     else:
         print(f"\nNo {type_annotation}s found.")
 
-# def extract_errors(lines, patterns, eliminateDuplicates: bool = False):
-#     if eliminateDuplicates:
-#         error_lines = set()  # Use a set to eliminate duplicates
-#     else:
-#         error_lines = []
-#     for line in lines:
-#         for pattern in patterns:
-#             if re.search(pattern, line, re.IGNORECASE):
-#                 if eliminateDuplicates:
-#                     error_lines.add(line.strip())  # Add to set
-#                 else:
-#                     error_lines.append(line.strip())  # Add to list
-#     return sorted(error_lines, key=str.lower)
-
 # Read log file
 with open(log_file_path, 'r') as file:
     log_contents = file.readlines()
@@ -58,20 +44,8 @@ with open(log_file_path, 'r') as file:
 error_matchers = extract_matches(log_contents, error_patterns)
 warning_matchers = extract_matches(log_contents, warning_patterns)
 
-
-
 print_matchers(error_matchers, "error")
 print_matchers(warning_matchers, "warning")
-
-
-# Format and display errors
-# if error_matchers:
-#     for i, error_line in enumerate(error_matchers, start=1):
-#           print(f"::error::{error_line}")
-# else:
-#     print("\nNo errors found.")
-
-# print(f"\nFound {len(error_matchers)} errors.")
 
 # Notes
 

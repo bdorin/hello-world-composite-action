@@ -33,4 +33,3 @@ runs:
       env:
         LOG_PATH: ${{ inputs.log-path }}
       shell: bash
-
