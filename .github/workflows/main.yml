@@ -1,4 +1,15 @@
-on: [push]
+name: Parse unity logs
+run-name: ${{ inputs.log-path }}
+on:
+  workflow_dispatch:
+    inputs:
+      log-path:
+        description: 'Path to the log file'
+        required: true
+        type: choice
+        options:
+          - 'logs/sample-project-failure.log'
+          - 'logs/sample-project-success.log'
 
 jobs:
   hello_world_job:
@@ -19,16 +30,3 @@ jobs:
         shell: python
         env:
           RANDOM_NUMBER: ${{ steps.foo.outputs.random-number }}
-
-    # steps:
-    #   - uses: actions/checkout@v4
-
-    #   - id: foo
-    #     uses: bdorin/hello-world-composite-action@main
-    #     with:
-    #       who-to-greet: 'Mona the Octocat'
-
-    #   - run: echo random-number "$RANDOM_NUMBER"
-    #     shell: bash
-    #     env:
-    #       RANDOM_NUMBER: ${{ steps.foo.outputs.random-number }}
