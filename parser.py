@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
 
 import re
-import argparse  # Add argparse to handle command-line arguments
 
-# Parse command-line arguments
-parser = argparse.ArgumentParser(description="Parse Unity logs for errors and warnings.")
-parser.add_argument("--log-path", required=True, help="Path to the log file.")  # Add dynamic log path argument
-args = parser.parse_args()
+
+import sys
+
+# Ensure log file path is provided
+if len(sys.argv) < 2:
+    raise ValueError("Please provide the log file path as an argument.")
 
 # File paths
-log_file_path = args.log_path  # Use the log-path argument dynamically
+log_file_path = sys.argv[1]
+
+
 
 # log_file_path = "logs/sample-project-failure.log"
 
@@ -51,4 +54,4 @@ if error_lines:
 else:
     print("\nNo errors found.")
 
-print(f"\nFound {len(error_lines)} errors. Errors have been logged to {output_file_path}.")
+print(f"\nFound {len(error_lines)} errors.")
