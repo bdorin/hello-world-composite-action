@@ -5,9 +5,7 @@ import re
 
 log_file_path = os.getenv("LOG_PATH")
 
-# log_file_path = "logs/sample-project-failure.log"
-
-# Error patterns
+# Error and warning patterns
 error_patterns = [
     r"(?i)^\s*(.*?)(\berror\b|\w*error\w*)\s*(.*)$",  # Matches lines with 'Error'
     r"(?i)\bwarning\b",                              # Matches generic 'warning'
@@ -28,7 +26,6 @@ def extract_errors(lines, patterns, eliminateDuplicates: bool = False):
                     error_lines.append(line.strip())  # Add to list
     return sorted(error_lines, key=str.lower)
 
-
 # Read log file
 with open(log_file_path, 'r') as file:
     log_contents = file.readlines()
@@ -38,10 +35,10 @@ error_lines = extract_errors(log_contents, error_patterns)
 
 # Format and display errors
 if error_lines:
-    print("\n--- Extracted Errors (Alphabetically Ordered) ---\n")
     for i, error_line in enumerate(error_lines, start=1):
-        print(f"{i}. {error_line}")
-        print("-" * 80)
+          print(f"::error::{error_line}")
+        # print(f"{i}. {error_line}")
+        # print("-" * 80)
 else:
     print("\nNo errors found.")
 
