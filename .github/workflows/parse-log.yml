@@ -27,8 +27,5 @@ jobs:
         uses: bdorin/hello-world-composite-action/.github/custom-actions@main
         with:
           log-path: ${{ inputs.log-path }}
-      - name: Debug ELIMINATE_DUPLICATES
-        run: echo "ELIMINATE_DUPLICATES = $ELIMINATE_DUPLICATES"
-        shell: bash
         env:
           ELIMINATE_DUPLICATES: ${{ inputs.eliminate-duplicates }}
