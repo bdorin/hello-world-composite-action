@@ -44,8 +44,8 @@ with open(log_file_path, 'r') as file:
     log_contents = file.readlines()
 
 # Extract and sort errors
-error_matchers = extract_matches(log_contents, error_patterns)
-warning_matchers = extract_matches(log_contents, warning_patterns)
+error_matchers = extract_matches(log_contents, error_patterns, eliminate_duplicates)
+warning_matchers = extract_matches(log_contents, warning_patterns, eliminate_duplicates)
 
 print_matchers(error_matchers, "error")
 print_matchers(warning_matchers, "warning")
