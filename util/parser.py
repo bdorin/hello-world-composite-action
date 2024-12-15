@@ -4,6 +4,7 @@ import os
 import re
 
 log_file_path = os.getenv("LOG_PATH")
+eliminate_duplicates = os.getenv("ELIMINATE_DUPLICATES", "false").lower() == "true"
 
 # Error and warning patterns
 error_patterns = [
