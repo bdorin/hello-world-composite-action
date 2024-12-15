@@ -27,11 +27,17 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - name: Set Greeting
-      run: echo "Hello $INPUT_WHO_TO_GREET."
-      shell: bash
-      env:
-        INPUT_WHO_TO_GREET: ${{ inputs.who-to-greet }}
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.x"
+
+    # - name: Set Greeting
+    #   run: echo "Hello $INPUT_WHO_TO_GREET."
+    #   shell: bash
+    #   env:
+    #     INPUT_WHO_TO_GREET: ${{ inputs.who-to-greet }}
 
     - name: Random Number Generator
       id: random-number-generator
