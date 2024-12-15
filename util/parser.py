@@ -6,7 +6,6 @@ import re
 log_file_path = os.getenv("LOG_PATH", "logs/sample-project-failure.log")
 eliminate_duplicates = os.getenv("ELIMINATE_DUPLICATES", "false")
 
-print(f"Eliminate Duplicates Flag: {eliminate_duplicates}")
 # Error and warning patterns
 error_patterns = [
     r"(?i)^\s*(.*?)(\berror\b|\w*error\w*)\s*(.*)$",
@@ -14,7 +13,6 @@ error_patterns = [
 
 warning_patterns = [
     r"(?i)\bwarning\b",
-    r'\[.*?warn.*?\]', 
 ]
 
 def extract_matches(lines, patterns, eliminate_duplicates: bool = False):
