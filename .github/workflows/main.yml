@@ -19,6 +19,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Parse logs
+        uses: ./action.yml
+        with:
+          log-path: ${{ inputs.log-path }}
+
     #   - id: foo
     #     uses: bdorin/hello-world-composite-action@main
     #     with:
