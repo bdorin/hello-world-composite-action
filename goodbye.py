@@ -44,11 +44,4 @@ if error_lines:
 else:
     print("\nNo errors found.")
 
-# Optionally write to a file
-with open(output_file_path, 'w') as output_file:
-    output_file.write("--- Extracted Errors (Alphabetically Ordered) ---\n\n")
-    for i, error_line in enumerate(error_lines, start=1):
-        output_file.write(f"{i}. {error_line}\n")
-        output_file.write("-" * 80 + "\n")
-
 print(f"\nFound {len(error_lines)} errors. Errors have been logged to {output_file_path}.")
