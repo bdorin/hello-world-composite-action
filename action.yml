@@ -34,10 +34,14 @@ runs:
         python-version: "3.x"
 
     - name: Install Dependencies
-      uses: shell
       run: |
-        import os
         python -m pip install --upgrade pip
+      shell: bash
+
+    - name: Parse unity Log
+      run: |
+        python goodbye.py
+      shell: bash
 
     # - name: Set Greeting
     #   run: echo "Hello $INPUT_WHO_TO_GREET."
