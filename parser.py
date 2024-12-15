@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 
+import os
 import re
 
-log_file_path = "logs/sample-project-failure.log"
+log_file_path = os.getenv("LOG_PATH")
+
+# log_file_path = "logs/sample-project-failure.log"
 
 # Error patterns
 error_patterns = [

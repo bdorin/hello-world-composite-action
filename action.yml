@@ -30,4 +30,6 @@ runs:
     - name: Parse unity Log
       run: |
         python parser.py
+      env:
+        LOG_PATH: ${{ inputs.log-path }}
       shell: bash
