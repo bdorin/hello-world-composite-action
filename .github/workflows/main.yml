@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Parse logs
-        uses: ./action.yml
+        uses: bdorin/hello-world-composite-action/action.yml@main
         with:
           log-path: ${{ inputs.log-path }}
 
