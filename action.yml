@@ -33,26 +33,30 @@ runs:
       with:
         python-version: "3.x"
 
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+
     # - name: Set Greeting
     #   run: echo "Hello $INPUT_WHO_TO_GREET."
     #   shell: bash
     #   env:
     #     INPUT_WHO_TO_GREET: ${{ inputs.who-to-greet }}
 
-    - name: Random Number Generator
-      id: random-number-generator
-      run: echo "random-number=$(echo $RANDOM)" >> $GITHUB_OUTPUT
-      shell: bash
+    # - name: Random Number Generator
+    #   id: random-number-generator
+    #   run: echo "random-number=$(echo $RANDOM)" >> $GITHUB_OUTPUT
+    #   shell: bash
 
-    - name: Set GitHub Path
-      run: echo "$GITHUB_ACTION_PATH" >> $GITHUB_PATH
-      shell: bash
-      env:
-        GITHUB_ACTION_PATH: ${{ github.action_path }}
+    # - name: Set GitHub Path
+    #   run: echo "$GITHUB_ACTION_PATH" >> $GITHUB_PATH
+    #   shell: bash
+    #   env:
+    #     GITHUB_ACTION_PATH: ${{ github.action_path }}
       
-    - name: Make goodbye.sh executable
-      run: chmod +x /home/runner/work/_actions/bdorin/hello-world-composite-action/main/goodbye.sh
-      shell: bash
+    # - name: Make goodbye.sh executable
+    #   run: chmod +x /home/runner/work/_actions/bdorin/hello-world-composite-action/main/goodbye.sh
+    #   shell: bash
 
     - name: Run goodbye.sh
       run: goodbye.sh
