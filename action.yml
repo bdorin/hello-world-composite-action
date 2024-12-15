@@ -58,6 +58,6 @@ runs:
     #   run: chmod +x /home/runner/work/_actions/bdorin/hello-world-composite-action/main/goodbye.sh
     #   shell: bash
 
-    - name: Run goodbye.sh
-      run: goodbye.sh
-      shell: bash
+    # - name: Run goodbye.sh
+    #   run: goodbye.sh
+    #   shell: bash
