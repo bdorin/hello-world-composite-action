@@ -21,6 +21,7 @@ jobs:
 
       - name: Parse logs
         uses: bdorin/hello-world-composite-action@main
+
         with:
           log-path: ${{ inputs.log-path }}
 
