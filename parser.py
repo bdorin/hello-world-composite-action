@@ -2,19 +2,7 @@
 
 import re
 
-
-import sys
-
-# Ensure log file path is provided
-if len(sys.argv) < 2:
-    raise ValueError("Please provide the log file path as an argument.")
-
-# File paths
-log_file_path = sys.argv[1]
-
-
-
-# log_file_path = "logs/sample-project-failure.log"
+log_file_path = "logs/sample-project-failure.log"
 
 # Error patterns
 error_patterns = [
