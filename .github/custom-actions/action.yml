@@ -3,7 +3,6 @@ name: 'Parse Unity Logs'
 description: 'Runs a script that parses errors and warnings from a Unity log file'
 
 inputs:
-
   log-path:
     description: "Path to the log file"
     required: true
