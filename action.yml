@@ -33,3 +33,7 @@ runs:
       env:
         LOG_PATH: ${{ inputs.log-path }}
       shell: bash
+    - name: Generate Error Annotations
+      run: |
+        text="This is an Error"
+        echo "::error file=app.js,line=10,col=15::$text"
