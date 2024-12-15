@@ -19,15 +19,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Parse logs
-        uses: bdorin/hello-world-composite-action/action.yml@main
-        with:
-          log-path: ${{ inputs.log-path }}
-
-    #   - id: foo
-    #     uses: bdorin/hello-world-composite-action@main
+    #   - name: Parse logs
+    #     uses: bdorin/hello-world-composite-action/action.yml@main
     #     with:
-    #       who-to-greet: 'Mona the Octocat'
+    #       log-path: ${{ inputs.log-path }}
+
+      - id: foo
+        uses: bdorin/hello-world-composite-action@main
+        with:
+          who-to-greet: 'Mona the Octocat'
 
     #   - run: |
     #       import os
