@@ -29,5 +29,5 @@ runs:
 
     - name: Parse unity Log
       run: |
-        python goodbye.py
+        python parser.py
       shell: bash

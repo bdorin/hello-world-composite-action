@@ -12,7 +12,6 @@ on:
           - 'logs/sample-project-success.log'
 
 jobs:
-
   Parse-Unity-Logs:
     runs-on: ubuntu-latest
     steps:
