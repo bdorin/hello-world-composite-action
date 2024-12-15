@@ -21,18 +21,5 @@ jobs:
 
       - name: Parse logs
         uses: bdorin/hello-world-composite-action@main
-
         with:
           log-path: ${{ inputs.log-path }}
-
-    #   - id: foo
-    #     uses: bdorin/hello-world-composite-action@main
-    #     with:
-    #       who-to-greet: 'Mona the Octocat'
-
-    #   - run: |
-    #       import os
-    #       print(f"random-number {os.environ['RANDOM_NUMBER']}")
-    #     shell: python
-    #     env:
-    #       RANDOM_NUMBER: ${{ steps.foo.outputs.random-number }}
