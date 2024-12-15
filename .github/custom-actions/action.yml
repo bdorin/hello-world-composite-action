@@ -28,7 +28,6 @@ runs:
 
     - name: Parse unity Log
       run: |
-        echo "LOG_PATH is set to: $LOG_PATH"
         python util/parser.py
       env:
         LOG_PATH: ${{ inputs.log-path }}

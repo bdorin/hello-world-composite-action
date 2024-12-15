@@ -3,9 +3,9 @@
 import os
 import re
 
-log_file_path = os.getenv("LOG_PATH")
+log_file_path = os.getenv("LOG_PATH", "logs/sample-project-failure.log")
 eliminate_duplicates = os.getenv("ELIMINATE_DUPLICATES", "false").lower() == "true"
-
+print(f"Eliminate Duplicates Flag: {eliminate_duplicates}")
 # Error and warning patterns
 error_patterns = [
     r"(?i)^\s*(.*?)(\berror\b|\w*error\w*)\s*(.*)$",
@@ -16,9 +16,9 @@ warning_patterns = [
     r'\[.*?warn.*?\]', 
 ]
 
-def extract_matches(lines, patterns, eliminate_duplicates: bool = False):
+def extract_matches(lines, patterns, eliminate_duplicates: bool = True):
     if eliminate_duplicates:
-        matched_lines = set()  # Use a set to eliminate duplicates
+        matched_lines = set() # Use a set to eliminate duplicates
     else:
         matched_lines = []
     for line in lines: # Iterates over every line in the lines list.
