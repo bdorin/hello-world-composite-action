@@ -6,20 +6,28 @@ import re
 log_file_path = os.getenv("LOG_PATH", "logs/sample-project-failure.log")
 eliminate_duplicates = os.getenv("ELIMINATE_DUPLICATES", "false").lower() == "true"
 
-# Error and warning patterns
+# Error and warning regex patterns
+
 error_patterns = [
-    r"(?i)^\s*(.*?)(\berror\b|\w*error\w*)\s*(.*)$",
+    # r'(?i)^\s*(.*?)(\berror\b|\w*error\w*)\s*(.*)$', #
+    r'(?i)(.*?)(\berror\b|\w*error\w*)(.*)'
 ]
 
 warning_patterns = [
-    r"(?i)\bwarning\b",
+    # r'(?i)^\s*(.*?)(\bwarning\b|\w*warning\w*)\s*(.*)$',
+    r'(?i)(.*?)(\bwarning\b|\w*warning\w*)(.*)',
 ]
 
-def extract_matches(lines, patterns, eliminate_duplicates: bool = False):
+# Uses the regex to iterate through every line in the file and find the patterns
+
+def extract_matches(lines, patterns, eliminate_duplicates: bool = True):
     if eliminate_duplicates:
         matched_lines = set() # Use a set to eliminate duplicates
+        print("duplicates eliminated")
     else:
         matched_lines = []
+        print("duplicates NOT eliminated")
+
     for line in lines: # Iterates over every line in the lines list.
         for pattern in patterns: # For each line, check the patterns
             if re.search(pattern, line, re.IGNORECASE): # Match pattern in line
