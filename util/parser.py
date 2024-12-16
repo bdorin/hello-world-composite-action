@@ -48,6 +48,11 @@ warning_matchers = extract_matches(log_contents, warning_patterns, eliminate_dup
 print_matchers(error_matchers, "error")
 print_matchers(warning_matchers, "warning")
 
+github_output = os.getenv('GITHUB_OUTPUT')
+if github_output:
+    with open(github_output, 'a') as output_file:
+        output_file.write(f"errors={len(error_matchers)}\n")
+
 # Notes
 
 # line.strip() - Removes leading and trailing whitespace from the line before storing it.
