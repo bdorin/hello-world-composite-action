@@ -53,7 +53,9 @@ print_matchers(error_matchers, 'error')
 print_matchers(warning_matchers, 'warning')
 
 with open(os.environ['GITHUB_OUTPUT'], 'a') as output_file:
-    output_file.write(f"errors={len(error_matchers)}\n")
+    output_file.write(f'errors={len(error_matchers)}\n')
+    output_file.write(f'warnings={len(warning_matchers)}\n')
+
 
 # output_file = os.getenv('GITHUB_OUTPUT')
 # if output_file:
