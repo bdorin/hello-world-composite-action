@@ -7,7 +7,6 @@ log_file_path = os.getenv('LOG_PATH')
 eliminate_duplicates = os.getenv('ELIMINATE_DUPLICATES', 'false').lower() == 'true'
 
 # Error and warning regex patterns
-
 error_patterns = [
     # r'(?i)(.*?)(\berror\b|\w*error\w*)(.*)', # should filter all lines that have error in them
     r'\[\w+::\w+\]\s*Error:.*$', # matches errors like e.g. [Licensing::Module] Error
@@ -53,8 +52,11 @@ warning_matchers = extract_matches(log_contents, warning_patterns, eliminate_dup
 print_matchers(error_matchers, 'error')
 print_matchers(warning_matchers, 'warning')
 
-output_file = os.getenv('GITHUB_OUTPUT')
-if output_file:
-    with open(output_file, 'a') as f:
-        f.write(f'errors={len(error_matchers)}\n')
-        f.write(f'warnings={len(warning_matchers)}\n')
+with open(os.environ['GITHUB_OUTPUT'], 'a') as output_file:
+    output_file.write(f"errors={len(error_matchers)}\n")
+
+# output_file = os.getenv('GITHUB_OUTPUT')
+# if output_file:
+#     with open(output_file, 'a') as f:
+#         f.write(f'errors={len(error_matchers)}\n')
+#         f.write(f'warnings={len(warning_matchers)}\n')
