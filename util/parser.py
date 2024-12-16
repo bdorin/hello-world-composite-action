@@ -3,15 +3,15 @@
 import os
 import re
 
-log_file_path = os.getenv("LOG_PATH", "logs/sample-project-success.log")
-eliminate_duplicates = os.getenv("ELIMINATE_DUPLICATES", "false").lower() == "true"
+log_file_path = os.getenv('LOG_PATH')
+eliminate_duplicates = os.getenv('ELIMINATE_DUPLICATES', 'false').lower() == 'true'
 
 # Error and warning regex patterns
 
 error_patterns = [
     # r'(?i)(.*?)(\berror\b|\w*error\w*)(.*)', # filters all lines that have error in them
-    # r'\[\w+::\w+\]\s*Error:.*$', # filters e.g. [Licensing::Module] Error
-    # r'.*(LogAssemblyErrors\s*).*', # filters LogAssemblyErrors
+    r'\[\w+::\w+\]\s*Error:.*$', # filters e.g. [Licensing::Module] Error
+    r'.*(LogAssemblyErrors\s*).*', # filters LogAssemblyErrors
     r'.*\(\d+,\d+\):\s*error\s+CS\d+:.*', # filters C# Compilation Errors
     r'(?i)(.*?) (Compilation Error for:) .*', # for Compilation Error
     r'(Error building).*' # for Error building
@@ -27,9 +27,9 @@ warning_patterns = [
 
 def extract_matches(lines, patterns, eliminate_duplicates: bool = False):
     matched_lines = set() if eliminate_duplicates else []
-    for line in lines: # Iterates over every line in the lines list.
-        for pattern in patterns: # For each line, check the patterns
-            if re.search(pattern, line, re.IGNORECASE): # Match pattern in line
+    for line in lines: # iterates over every line in the lines list
+        for pattern in patterns: # for each line, check the regex patterns
+            if re.search(pattern, line, re.IGNORECASE): # match pattern in line
                 if eliminate_duplicates:
                     matched_lines.add(line.strip())
                 else:
@@ -38,7 +38,7 @@ def extract_matches(lines, patterns, eliminate_duplicates: bool = False):
 
 def print_matchers(type_matcher, type_annotation):
     if type_matcher:
-        for i, line in enumerate(type_matcher, start=1):
+        for line in type_matcher:
             print(f'::{type_annotation}::{line}')
     else:
         print(f'\nNo {type_annotation}s found.')
@@ -59,15 +59,3 @@ if output_file:
     with open(output_file, 'a') as f:
         f.write(f'errors={len(error_matchers)}\n')
         f.write(f'warnings={len(warning_matchers)}\n')
-
-# Notes
-
-# line.strip() - Removes leading and trailing whitespace from the line before storing it.
-# matched_lines.add(line.strip()) the line is added to the set (matched_lines.add()), ensuring duplicates are automatically ignored
-# matched_lines.append(line.strip()) the line is added to the list (matched_lines.append()), preserving duplicates
-# re.IGNORECASE for case sensitive
-# sorted(matched_lines, key=str.lower) sorts the matches in a case-insensitive manner. If key=str.lower is removed, then uppercase letters will have priority, thus making alphabeticall sorting redundant
-# 'r' means read mode
-# with block - Manages the opening and closing of the file automatically.
-# file.readlines() - Reads all lines from the file into a list.
-# 
