@@ -49,9 +49,12 @@ print_matchers(error_matchers, "error")
 print_matchers(warning_matchers, "warning")
 
 github_output = os.getenv('GITHUB_OUTPUT')
+print(f"GITHUB_OUTPUT path: {github_output}")
 if github_output:
     with open(github_output, 'a') as output_file:
         output_file.write(f"errors={len(error_matchers)}\n")
+
+print(f"Errors detected: {error_matchers}")
 
 # Notes
 

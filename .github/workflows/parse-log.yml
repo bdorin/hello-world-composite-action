@@ -34,3 +34,6 @@ jobs:
       - name: Use parsed errors
         run: |
           echo "Errors found: ${{ steps.parse-logs.outputs.errors }}"
+      
+      - name: Debug output file
+        run: cat $GITHUB_OUTPUT
