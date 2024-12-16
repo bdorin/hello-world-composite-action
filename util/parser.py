@@ -3,12 +3,12 @@
 import os
 import re
 
-log_file_path = os.getenv('LOG_PATH', 'sample-project-failure.log') # sample-project-failure.log left here for debug purposes
+log_file_path = os.getenv('LOG_PATH', 'sample-project-failure.log') # sample-project-failure.log left here for debug purposes (update path to work locally)
 eliminate_duplicates = os.getenv('ELIMINATE_DUPLICATES', 'false').lower() == 'true'
 
 # Error and warning regex patterns
 error_patterns = [
-    # r'(?i)(.*?)(\berror\b|\w*error\w*)(.*)', # should filter all lines that have error in them
+    # r'(?i)(.*?)(\w*error\w*)(.*)', # should filter all lines that have error in them
     r'\[\w+::\w+\]\s*Error:.*$', # matches errors like e.g. [Licensing::Module] Error
     r'.*(LogAssemblyErrors\s*).*', # matches errors containing LogAssemblyErrors
     r'.*\(\d+,\d+\):\s*error\s+CS\d+:.*', # matches C# Errors
@@ -17,7 +17,7 @@ error_patterns = [
 ]
 
 warning_patterns = [
-    # r'(?i)(.*?)(\bwarning\b|\w*warning\w*)(.*)', # should filter all lines that have warning in them
+    # r'(?i)(.*?)(\w*warning\w*)(.*)', # should filter all lines that have warning in them
     r'(?i)(.*\(\d+,\d+\):)\s*warning\s+CS\d+:.*$' # filters C# Compilation Errors
 ]
 
@@ -41,7 +41,7 @@ def print_matchers(type_matcher, type_annotation):
     else:
         print(f'\nNo {type_annotation}s found.')
 
-# Read log file
+# Open and read log file
 with open(log_file_path, 'r') as file:
     log_contents = file.readlines()
 

@@ -1,5 +1,4 @@
 name: 'Parse Unity Logs'
-
 description: 'Runs a script that parses errors and warnings from a Unity log file'
 
 inputs:
@@ -21,7 +20,6 @@ outputs:
 runs:
   using: 'composite'
   steps:
-
     - name: Setup Python
       uses: actions/setup-python@v4
       with:
