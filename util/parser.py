@@ -51,6 +51,7 @@ output_file = os.getenv('GITHUB_OUTPUT')
 if output_file:
     with open(output_file, 'a') as f:
         f.write(f"errors={len(error_matchers)}\n")
+        f.write(f"warnings={len(warning_matchers)}\n")
 
 # Notes
 

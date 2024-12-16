@@ -34,3 +34,4 @@ jobs:
       - name: Use parsed errors
         run: |
           echo "Errors found: ${{ steps.parse-logs.outputs.errors }}"
+          echo "Warnings found: ${{ steps.parse-logs.outputs.warnings }}"

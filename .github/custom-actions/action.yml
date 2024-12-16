@@ -11,7 +11,12 @@ inputs:
 outputs:
   errors:
     description: "Parsed errors from the log file"
-    value: ${{ steps.parse-logs.outputs.errors }}
+    value: 
+      ${{ steps.parse-logs.outputs.errors }}
+  warnings:
+    description: "Parsed warnings from the log file"
+    value: 
+      ${{ steps.parse-logs.outputs.warnings }}
 
 runs:
   using: "composite"
