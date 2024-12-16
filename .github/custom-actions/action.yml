@@ -4,22 +4,22 @@ description: 'Runs a script that parses errors and warnings from a Unity log fil
 
 inputs:
   log-path:
-    description: "Path to the log file"
+    description: 'Path to the log file'
     required: true
     type: string
 
 outputs:
   errors:
-    description: "Parsed errors from the log file"
+    description: 'Parsed errors from the log file'
     value: 
       ${{ steps.parse-logs.outputs.errors }}
   warnings:
-    description: "Parsed warnings from the log file"
+    description: 'Parsed warnings from the log file'
     value: 
       ${{ steps.parse-logs.outputs.warnings }}
 
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
 
     - name: Setup Python

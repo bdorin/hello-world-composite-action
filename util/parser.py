@@ -9,33 +9,32 @@ eliminate_duplicates = os.getenv('ELIMINATE_DUPLICATES', 'false').lower() == 'tr
 # Error and warning regex patterns
 
 error_patterns = [
-    # r'(?i)(.*?)(\berror\b|\w*error\w*)(.*)', # filters all lines that have error in them
-    r'\[\w+::\w+\]\s*Error:.*$', # filters e.g. [Licensing::Module] Error
-    r'.*(LogAssemblyErrors\s*).*', # filters LogAssemblyErrors
-    r'.*\(\d+,\d+\):\s*error\s+CS\d+:.*', # filters C# Compilation Errors
-    r'(?i)(.*?) (Compilation Error for:) .*', # for Compilation Error
-    r'(Error building).*' # for Error building
+    # r'(?i)(.*?)(\berror\b|\w*error\w*)(.*)', # should filter all lines that have error in them
+    r'\[\w+::\w+\]\s*Error:.*$', # matches errors like e.g. [Licensing::Module] Error
+    r'.*(LogAssemblyErrors\s*).*', # matches errors containing LogAssemblyErrors
+    r'.*\(\d+,\d+\):\s*error\s+CS\d+:.*', # matches C# Errors
+    r'(?i)(.*?) (Compilation Error for:) .*', # matches Compilation Errors
+    r'(Error building).*' # matches Error building
 ]
 
 warning_patterns = [
-    # r'(?i)(.*?)(\bwarning\b|\w*warning\w*)(.*)', # filters all lines that have warning in them
+    # r'(?i)(.*?)(\bwarning\b|\w*warning\w*)(.*)', # should filter all lines that have warning in them
     r'(?i)(.*\(\d+,\d+\):)\s*warning\s+CS\d+:.*$' # filters C# Compilation Errors
-
 ]
 
 # Uses the regex to iterate through every line in the file and find the patterns
-
 def extract_matches(lines, patterns, eliminate_duplicates: bool = False):
     matched_lines = set() if eliminate_duplicates else []
-    for line in lines: # iterates over every line in the lines list
+    for line in lines: # iterates over every line in the lines file
         for pattern in patterns: # for each line, check the regex patterns
             if re.search(pattern, line, re.IGNORECASE): # match pattern in line
                 if eliminate_duplicates:
                     matched_lines.add(line.strip())
                 else:
                     matched_lines.append(line.strip())
-    return sorted(matched_lines, key=str.lower)
+    return sorted(matched_lines, key=str.lower) # returned the result sorted alphabetically, in a case-insensitive manner
 
+# Prints each matched line from a list with a specified annotation prefix
 def print_matchers(type_matcher, type_annotation):
     if type_matcher:
         for line in type_matcher:
