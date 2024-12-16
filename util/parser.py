@@ -16,7 +16,6 @@ warning_patterns = [
 ]
 
 def extract_matches(lines, patterns, eliminate_duplicates: bool = False):
-    print(f"Eliminate Duplicates Flag Inside function: {eliminate_duplicates}")
     if eliminate_duplicates:
         matched_lines = set() # Use a set to eliminate duplicates
     else:
@@ -48,13 +47,12 @@ warning_matchers = extract_matches(log_contents, warning_patterns, eliminate_dup
 print_matchers(error_matchers, "error")
 print_matchers(warning_matchers, "warning")
 
-github_output = os.getenv('GITHUB_OUTPUT')
-print(f"GITHUB_OUTPUT path: {github_output}")
-if github_output:
-    with open(github_output, 'a') as output_file:
+output_file_path = os.getenv("OUTPUT_FILE")  # Use explicit OUTPUT_FILE
+if output_file_path:
+    with open(output_file_path, 'a') as output_file:
         output_file.write(f"errors={len(error_matchers)}\n")
-
-print(f"Errors detected: {error_matchers}")
+else:
+    print("::error::OUTPUT_FILE environment variable not found.")
 
 # Notes
 

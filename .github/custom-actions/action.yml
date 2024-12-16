@@ -31,4 +31,5 @@ runs:
         python util/parser.py
       env:
         LOG_PATH: ${{ inputs.log-path }}
+        OUTPUT_FILE: $GITHUB_OUTPUT
       shell: bash
