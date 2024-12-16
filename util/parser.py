@@ -3,7 +3,7 @@
 import os
 import re
 
-log_file_path = os.getenv('LOG_PATH')
+log_file_path = os.getenv('LOG_PATH', 'sample-project-failure.log') # sample-project-failure.log left here for debug purposes
 eliminate_duplicates = os.getenv('ELIMINATE_DUPLICATES', 'false').lower() == 'true'
 
 # Error and warning regex patterns
@@ -53,6 +53,6 @@ print_matchers(error_matchers, 'error')
 print_matchers(warning_matchers, 'warning')
 
 # Opens the GITHUB_OUTPUT file in append mode and writes the counts of errors and warnings
-with open(os.environ['GITHUB_OUTPUT'], 'a') as output_file:
+with open(os.environ['GITHUB_OUTPUT']) as output_file:
     output_file.write(f'errors={len(error_matchers)}\n')
     output_file.write(f'warnings={len(warning_matchers)}\n')
