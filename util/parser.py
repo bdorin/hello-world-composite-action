@@ -20,13 +20,10 @@ warning_patterns = [
 
 # Uses the regex to iterate through every line in the file and find the patterns
 
-def extract_matches(lines, patterns, eliminate_duplicates: bool = True):
-    if eliminate_duplicates:
-        matched_lines = set() # Use a set to eliminate duplicates
-        print("duplicates eliminated")
-    else:
-        matched_lines = []
-        print("duplicates NOT eliminated")
+def extract_matches(lines, patterns, eliminate_duplicates: bool = False):
+    
+    matched_lines = set() if eliminate_duplicates else []
+    print("duplicates eliminated" if eliminate_duplicates else "duplicates NOT eliminated")
 
     for line in lines: # Iterates over every line in the lines list.
         for pattern in patterns: # For each line, check the patterns
