@@ -3,28 +3,30 @@
 import os
 import re
 
-log_file_path = os.getenv("LOG_PATH", "logs/sample-project-failure.log")
+log_file_path = os.getenv("LOG_PATH", "logs/sample-project-success.log")
 eliminate_duplicates = os.getenv("ELIMINATE_DUPLICATES", "false").lower() == "true"
 
 # Error and warning regex patterns
 
 error_patterns = [
-    # r'(?i)^\s*(.*?)(\berror\b|\w*error\w*)\s*(.*)$', #
-    r'(?i)(.*?)(\berror\b|\w*error\w*)(.*)'
+    # r'(?i)(.*?)(\berror\b|\w*error\w*)(.*)', # filters all lines that have error in them
+    # r'\[\w+::\w+\]\s*Error:.*$', # filters e.g. [Licensing::Module] Error
+    # r'.*(LogAssemblyErrors\s*).*', # filters LogAssemblyErrors
+    r'.*\(\d+,\d+\):\s*error\s+CS\d+:.*', # filters C# Compilation Errors
+    r'(?i)(.*?) (Compilation Error for:) .*', # for Compilation Error
+    r'(Error building).*' # for Error building
 ]
 
 warning_patterns = [
-    # r'(?i)^\s*(.*?)(\bwarning\b|\w*warning\w*)\s*(.*)$',
-    r'(?i)(.*?)(\bwarning\b|\w*warning\w*)(.*)',
+    # r'(?i)(.*?)(\bwarning\b|\w*warning\w*)(.*)', # filters all lines that have warning in them
+    r'(?i)(.*\(\d+,\d+\):)\s*warning\s+CS\d+:.*$' # filters C# Compilation Errors
+
 ]
 
 # Uses the regex to iterate through every line in the file and find the patterns
 
 def extract_matches(lines, patterns, eliminate_duplicates: bool = False):
-    
     matched_lines = set() if eliminate_duplicates else []
-    print("duplicates eliminated" if eliminate_duplicates else "duplicates NOT eliminated")
-
     for line in lines: # Iterates over every line in the lines list.
         for pattern in patterns: # For each line, check the patterns
             if re.search(pattern, line, re.IGNORECASE): # Match pattern in line
@@ -37,9 +39,9 @@ def extract_matches(lines, patterns, eliminate_duplicates: bool = False):
 def print_matchers(type_matcher, type_annotation):
     if type_matcher:
         for i, line in enumerate(type_matcher, start=1):
-            print(f"::{type_annotation}::{line}")
+            print(f'::{type_annotation}::{line}')
     else:
-        print(f"\nNo {type_annotation}s found.")
+        print(f'\nNo {type_annotation}s found.')
 
 # Read log file
 with open(log_file_path, 'r') as file:
@@ -49,14 +51,14 @@ with open(log_file_path, 'r') as file:
 error_matchers = extract_matches(log_contents, error_patterns, eliminate_duplicates)
 warning_matchers = extract_matches(log_contents, warning_patterns, eliminate_duplicates)
 
-print_matchers(error_matchers, "error")
-print_matchers(warning_matchers, "warning")
+print_matchers(error_matchers, 'error')
+print_matchers(warning_matchers, 'warning')
 
 output_file = os.getenv('GITHUB_OUTPUT')
 if output_file:
     with open(output_file, 'a') as f:
-        f.write(f"errors={len(error_matchers)}\n")
-        f.write(f"warnings={len(warning_matchers)}\n")
+        f.write(f'errors={len(error_matchers)}\n')
+        f.write(f'warnings={len(warning_matchers)}\n')
 
 # Notes
 
