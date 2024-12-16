@@ -47,12 +47,10 @@ warning_matchers = extract_matches(log_contents, warning_patterns, eliminate_dup
 print_matchers(error_matchers, "error")
 print_matchers(warning_matchers, "warning")
 
-output_file_path = os.getenv("OUTPUT_FILE")  # Use explicit OUTPUT_FILE
-if output_file_path:
-    with open(output_file_path, 'a') as output_file:
-        output_file.write(f"errors={len(error_matchers)}\n")
-else:
-    print("::error::OUTPUT_FILE environment variable not found.")
+output_file = os.getenv('GITHUB_OUTPUT')
+if output_file:
+    with open(output_file, 'a') as f:
+        f.write(f"errors={len(error_matchers)}\n")
 
 # Notes
 

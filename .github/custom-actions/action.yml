@@ -11,6 +11,7 @@ inputs:
 outputs:
   errors:
     description: "Parsed errors from the log file"
+    value: ${{ steps.parse-logs.outputs.errors }}
 
 runs:
   using: "composite"
@@ -27,9 +28,9 @@ runs:
       shell: bash
 
     - name: Parse unity Log
+      id: parse-logs
       run: |
         python util/parser.py
       env:
         LOG_PATH: ${{ inputs.log-path }}
-        OUTPUT_FILE: $GITHUB_OUTPUT
       shell: bash
